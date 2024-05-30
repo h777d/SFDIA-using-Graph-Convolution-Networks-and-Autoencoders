@@ -2,6 +2,9 @@
 
 Welcome to the repository for sensor fault detection, isolation, and accommodation using Graph Convolution Networks (GCNs) and Autoencoders. This repository contains two main Python projects and two datasets to support the analysis and development.
 
+
+![alt text]([SFDIA.png](https://github.com/h777d/SFDIA-using-Graph-Convolution-Networks-and-Autoencoders/blob/09c6cfc4a3418acf5c8f153a81fa193b879d603b/SFDIA.png))
+
 ## Table of Contents
 
 - [Introduction](#introduction)
