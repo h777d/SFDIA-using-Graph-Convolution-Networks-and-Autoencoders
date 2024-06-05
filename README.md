@@ -14,6 +14,7 @@ Welcome to the repository for sensor fault detection, isolation, and accommodati
 - [Graph Convolution Network](#graph-convolution-network)
 - [Autoencoder](#autoencoder)
 - [Installation](#installation)
+- [References](#references)
 
 
 ## Introduction
@@ -56,3 +57,7 @@ Install the required packages:
 bash
 pip install -r requirements.txt
 ```
+
+## References
+1.	Hossein Darvishi, D. Ciuonzo and P. S. Rossi, " Deep Recurrent Graph Convolutional Architecture for Sensor Fault Detection, Isolation and Accommodation in Digital Twins" IEEE Sensor journal, 2023.
+2.	H. Darvishi, D. Ciuonzo, E. R. Eide and P. Salvo Rossi, “Sensor-Fault Detection, Isolation and Accommodation for Digital Twins via Modular Data-Driven Architecture,” IEEE Sensor Journal, Vol. 21, No. 4, 2021, pp. 4827-4838.
