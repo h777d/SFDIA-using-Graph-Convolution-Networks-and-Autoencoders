@@ -7,7 +7,7 @@ Created on Thu Apr 20 17:15:24 2022
 
 import os
 import sys
-file_dir = os.path.dirname(os.path.dirname(os.path.abspath('/Users/hosseind/Desktop/Datasets_codes/AGCRN-master')))
+file_dir = os.path.dirname(os.path.dirname(os.path.abspath('./Datasets_codes/AGCRN-master')))
 print(file_dir)
 sys.path.append(file_dir)
 
@@ -801,31 +801,31 @@ def Add_Window_Horizon(data, window=3, horizon=1, single=False):
 def load_st_dataset(dataset):
     #output B, N, D
     if dataset == 'PEMSD4':
-        data_path = os.path.join('/Users/hosseind/Desktop/Datasets_codes/AGCRN-master/data/PEMS04/pems04.npz')
+        data_path = os.path.join('./Datasets_codes/AGCRN-master/data/PEMS04/pems04.npz')
         data = np.load(data_path)['data'][:, :, 0]  #onley the first dimension, traffic flow data
     elif dataset == 'PEMSD8':
-        data_path = os.path.join('/Users/hosseind/Desktop/Datasets_codes/AGCRN-master/data/PEMS08/pems08.npz')
+        data_path = os.path.join('./Datasets_codes/AGCRN-master/data/PEMS08/pems08.npz')
         data = np.load(data_path)['data'][:, :, 0]  #onley the first dimension, traffic flow data
     elif dataset == 'PEMSD7':
-        data = pd.read_csv(r'/Users/hosseind/Desktop/Datasets_codes/PeMSD7/PeMSD7_speed.csv')
+        data = pd.read_csv(r'./Datasets_codes/PeMSD7/PeMSD7_speed.csv')
         data = data.values
         #data = data[0::10,:]
     elif dataset == 'WADI':
-        data = pd.read_csv(r'/Users/hosseind/Desktop/Datasets_codes/WADI/WADI.A2_19 Nov 2019/WADI_14days_new.csv')
+        data = pd.read_csv(r'./Datasets_codes/WADI/WADI.A2_19 Nov 2019/WADI_14days_new.csv')
         data = data.values
         data = data[0::10,:]    
     elif dataset == 'WaterTank':
-        data = pd.read_csv(r'/Users/hosseind/Desktop/Datasets_codes/GraphDataset-master/measurements_1.csv')
-        data2 = pd.read_csv(r'/Users/hosseind/Desktop/Datasets_codes/GraphDataset-master/measurements_2.csv')
-        data3 = pd.read_csv(r'/Users/hosseind/Desktop/Datasets_codes/GraphDataset-master/measurements_3.csv')
+        data = pd.read_csv(r'./Datasets_codes/GraphDataset-master/measurements_1.csv')
+        data2 = pd.read_csv(r'./Datasets_codes/GraphDataset-master/measurements_2.csv')
+        data3 = pd.read_csv(r'./Datasets_codes/GraphDataset-master/measurements_3.csv')
         data = data.values
         data2 = data2.values
         data3 = data3.values
         data = np.concatenate((data, data2, data3), axis=0)
         data = data[:,1:101]    
     elif dataset == 'SWAT':
-        data1 = pd.read_excel(r'/Users/hosseind/Desktop/Datasets_codes/WADI_SWAT/SWaT.A1 & A2_Dec 2015/SWaT_Dataset_Normal_v0.xlsx')
-        data2 = pd.read_excel(r'/Users/hosseind/Desktop/Datasets_codes/WADI_SWAT/SWaT.A1 & A2_Dec 2015/SWaT_Dataset_Attack_v0.xlsx')
+        data1 = pd.read_excel(r'./Datasets_codes/WADI_SWAT/SWaT.A1 & A2_Dec 2015/SWaT_Dataset_Normal_v0.xlsx')
+        data2 = pd.read_excel(r'./Datasets_codes/WADI_SWAT/SWaT.A1 & A2_Dec 2015/SWaT_Dataset_Attack_v0.xlsx')
         data1 = data1.values
         data1 = data1[0::12,:]
         data1 = data1[:,1:]
@@ -1134,7 +1134,7 @@ DEVICE = 'cuda:0'
 MODEL = 'AGCRN'
 
 #get configuration
-config_file = '/Users/hosseind/Desktop/Datasets_codes/AGCRN-master/model/{}_{}.conf'.format(DATASET, MODEL)
+config_file = './Datasets_codes/AGCRN-master/model/{}_{}.conf'.format(DATASET, MODEL)
 print('Read configuration file: %s' % (config_file))
 config = configparser.ConfigParser()
 config.read(config_file)
@@ -1269,7 +1269,7 @@ if args.lr_decay:
 current_time = datetime.now().strftime('%Y%m%d%H%M%S')
 #current_dir = os.path.dirname(os.path.realpath('//home.ansatt.ntnu.no/hosseind/Desktop/AGCRN-master'))
 #log_dir = os.path.join(current_dir,'experiments', args.dataset, current_time)
-args.log_dir = '/Users/hosseind/Desktop/Datasets_codes/AGCRN-master/experiment/' + args.dataset
+args.log_dir = './Datasets_codes/AGCRN-master/experiment/' + args.dataset
 
 #start training
 trainer = Trainer(model, loss, optimizer, train_dataloader_f, val_dataloader_f, test_dataloader_f, scaler,
@@ -1277,7 +1277,7 @@ trainer = Trainer(model, loss, optimizer, train_dataloader_f, val_dataloader_f, 
 if args.mode == 'Train':
     y_true, y_pred = trainer.train()
 elif args.mode == 'Test':
-    model.load_state_dict(torch.load('/Users/hosseind/Desktop/Datasets_codes/AGCRN-master/experiment/' + args.dataset + '/' + 'best_model.pth'))
+    model.load_state_dict(torch.load('./Datasets_codes/AGCRN-master/experiment/' + args.dataset + '/' + 'best_model.pth'))
     print("Load saved model")
     y_true, y_pred = trainer.test(model, trainer.args, test_loader, scaler, trainer.logger)
 else:
@@ -1303,10 +1303,10 @@ for name, param in model.named_parameters():
     
 A = A.data.numpy()
 A = np.multiply(A,np.transpose(A))
-np.savetxt(r'/Users/hosseind/Desktop/Datasets_codes/GraphDataset-master/connection_python.csv', A, delimiter=',')
+np.savetxt(r'./Datasets_codes/GraphDataset-master/connection_python.csv', A, delimiter=',')
 
 import scipy.io
-scipy.io.savemat(r'/Users/hosseind/Desktop/Datasets_codes/GraphDataset-master/connection_python2.mat', {"data": A })
+scipy.io.savemat(r'./Datasets_codes/GraphDataset-master/connection_python2.mat', {"data": A })
 
 
 def count_parameters(model):
@@ -1849,9 +1849,9 @@ plt.show()
 
 plt.savefig('untitled12_mlp__12_12_f5_WT.png')
 
-savetxt(r'/Users/hosseind/Desktop/data/PD_GRN_WT_D_E2_cheb1.csv', PD, delimiter=',')
-savetxt(r'/Users/hosseind/Desktop/data/PF_GRN_WT_D_E2_cheb1.csv', PF, delimiter=',')
-savetxt(r'/Users/hosseind/Desktop/data/PI_GRN_WT_D_E2_cheb1.csv', PI, delimiter=',')
+savetxt(r'./data/PD_GRN_WT_D_E2_cheb1.csv', PD, delimiter=',')
+savetxt(r'./data/PF_GRN_WT_D_E2_cheb1.csv', PF, delimiter=',')
+savetxt(r'./data/PI_GRN_WT_D_E2_cheb1.csv', PI, delimiter=',')
 
 #plt.plot(data[10*288:288*24,11,0])
 #data1 = scaler.inverse_transform(data)
@@ -1981,9 +1981,9 @@ for i in range(len(Predict_rnn)):
 Label_tstc = np.argmax(Label_tst_f[args.lag-1:-1,0,:], axis=1, out=None)
 
 cmm = metrics.confusion_matrix(Label_tstc, mse1, normalize='all')
-savetxt(r'/Users/hosseind/Desktop/data/cmm.csv', cmm, delimiter=',')
-savetxt(r'/Users/hosseind/Desktop/data/true.csv', Label_tstc, delimiter=',')
-savetxt(r'/Users/hosseind/Desktop/data/predicted.csv', mse1, delimiter=',')
+savetxt(r'./data/cmm.csv', cmm, delimiter=',')
+savetxt(r'./data/true.csv', Label_tstc, delimiter=',')
+savetxt(r'./data/predicted.csv', mse1, delimiter=',')
 
 '''
 from matplotlib import cm
@@ -2139,7 +2139,7 @@ trainer = Trainer(model2, loss, optimizer, train_loader, val_loader, test_loader
 if args.mode == 'Train':
     y_true, y_pred = trainer.train()
 elif args.mode == 'Test':
-    model2.load_state_dict(torch.load('/Users/hosseind/Desktop/AGCRN-master/experiment/' + args.dataset + '/' + 'best_model.pth'))
+    model2.load_state_dict(torch.load('./AGCRN-master/experiment/' + args.dataset + '/' + 'best_model.pth'))
     print("Load saved model")
     y_true, y_pred = trainer.test(model2, trainer.args, test_loader, scaler, trainer.logger)
 else:
@@ -2592,7 +2592,7 @@ plt.show()
 import networkx as nx
 
 
-A = pd.read_csv(r'/Users/hosseind/Desktop/GraphDataset-master/connection_matrix_inverse_distance.csv')
+A = pd.read_csv(r'./GraphDataset-master/connection_matrix_inverse_distance.csv')
 A = A.values
 A = A[:,1:] 
 

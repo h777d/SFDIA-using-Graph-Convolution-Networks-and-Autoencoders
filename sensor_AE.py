@@ -309,7 +309,7 @@ def DriftFault(Nf,N,Nn,size):
 
 #%%
 # load the dataset
-dataframe = pd.read_excel(r'/Users/hosseind/Desktop/AirQualityUCI.xlsx')
+dataframe = pd.read_excel(r'./AirQualityUCI.xlsx')
 dataset = dataframe.values
 M=5
 dataset = dataset[M:-M,:]
@@ -337,7 +337,7 @@ df.corr()
 
 #%%
 # load the dataset
-dataframe = pd.read_csv(r'/Users/hosseind/Desktop/pmsm_temperature_data.csv')
+dataframe = pd.read_csv(r'./pmsm_temperature_data.csv')
 dataset = dataframe.values
 dataset = dataset[::10,:]
 plt.plot(dataset[:,12])
@@ -511,7 +511,7 @@ df = pd.DataFrame(dataset)
 df.corr()
 
 #%%
-data_path = os.path.join('/Users/hosseind/Desktop/AGCRN-master/data/PEMS08/pems08.npz')
+data_path = os.path.join('./AGCRN-master/data/PEMS08/pems08.npz')
 dataset = np.load(data_path)['data'][:, :, 0] 
 
 sn, rn = 170 ,0  # rn measurments should be located at the last columns
@@ -528,7 +528,7 @@ dataset = dataset[M:-M,:]
 #df = pd.DataFrame(dataset)
 #df.corr()
 #%% watertank
-dataset = pd.read_csv(r'/Users/hosseind/Desktop/GraphDataset-master/measurements_1.csv')
+dataset = pd.read_csv(r'./GraphDataset-master/measurements_1.csv')
 dataset = dataset.values
 dataset = dataset[:,1:101]   
 
@@ -547,7 +547,7 @@ dataset = dataset[M:-M,:]
 #df.corr()
 
 #%% PemsD8
-data_path = os.path.join('/Users/hosseind/Desktop/AGCRN-master/data/PEMS08/pems08.npz')
+data_path = os.path.join('./AGCRN-master/data/PEMS08/pems08.npz')
 dataset = np.load(data_path)['data'][:, :, 0]  #onley the first dimension, traffic flow data
 
 sn, rn = 170 ,0  # rn measurments should be located at the last columns
@@ -558,9 +558,9 @@ Lp = 11
 bs , l = 20, 0.0004
 d_type='float32'
 #%% Water Tanks
-data = pd.read_csv(r'/Users/hosseind/Desktop/GraphDataset-master/measurements_1.csv')
-data2 = pd.read_csv(r'/Users/hosseind/Desktop/GraphDataset-master/measurements_2.csv')
-data3 = pd.read_csv(r'/Users/hosseind/Desktop/GraphDataset-master/measurements_3.csv')
+data = pd.read_csv(r'./GraphDataset-master/measurements_1.csv')
+data2 = pd.read_csv(r'./GraphDataset-master/measurements_2.csv')
+data3 = pd.read_csv(r'./GraphDataset-master/measurements_3.csv')
 data = data.values
 data2 = data2.values
 data3 = data3.values
@@ -831,9 +831,9 @@ plt.xscale('log',base=10)
 plt.legend()
 plt.show()
 
-savetxt(r'/Users/hosseind/Desktop/data/PD_AE_WT_B.csv', PD, delimiter=',')
-savetxt(r'/Users/hosseind/Desktop/data/PF_AE_WT_B.csv', PF, delimiter=',')
-savetxt(r'/Users/hosseind/Desktop/data/PI_AE_WT_B.csv', PI, delimiter=',')
+savetxt(r'./data/PD_AE_WT_B.csv', PD, delimiter=',')
+savetxt(r'./data/PF_AE_WT_B.csv', PF, delimiter=',')
+savetxt(r'./data/PI_AE_WT_B.csv', PI, delimiter=',')
 
 
 #%% AE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1003,9 +1003,9 @@ with tf.device('/CPU:0'):
     testPredict2 = history22.model.predict(testDF)
 
 
-savetxt(r'/Users/hosseind/Desktop/data/datatst_Lc10_wdrift.csv', res_tst[:,:sn], delimiter=',')
+savetxt(r'./data/datatst_Lc10_wdrift.csv', res_tst[:,:sn], delimiter=',')
 #savetxt(r'\\home.ansatt.ntnu.no\hosseind\Desktop\data\labeltst_Lc10_wdrift.csv', Label_tstc, delimiter=',')
-savetxt(r'/Users/hosseind/Desktop/data/labeltst_Lc10_wdrift.csv', Label_tst, delimiter=',')
+savetxt(r'./data/labeltst_Lc10_wdrift.csv', Label_tst, delimiter=',')
 
 
 
@@ -1070,8 +1070,8 @@ for k in range(len(Tau)):
     con_int[k,:,:] = confusion_matrix(y_pred=clsfr_ohe[k,:], y_true=Label_tst_ohe, labels=np.arange(0,pow(2,sn),1))
     con_sep[k,:,:,:] = multilabel_confusion_matrix(Label_tst[:,1:], clsfr[k,:])
 
-scipy.io.savemat(r'/Users/hosseind/Desktop/data/con_int.mat', dict(con_int=con_int))
-scipy.io.savemat(r'/Users/hosseind/Desktop/data/con_sep.mat', dict(con_sep=con_sep))
+scipy.io.savemat(r'./data/con_int.mat', dict(con_int=con_int))
+scipy.io.savemat(r'./data/con_sep.mat', dict(con_sep=con_sep))
 
 
 
@@ -1105,7 +1105,7 @@ for i in range(len(Label_tst)):
                 testPredict_DAE2[i,k] = (np.subtract(testPredict2[i,k*(Lv+1)],testDF_h[i,k*(Lv+1)]))
             else:
                 testPredict_DAE2[i,k] = (np.subtract(testDF_save[i,k*(Lv+1)],testDF_h[i,k*(Lv+1)]))
-savetxt(r'/Users/hosseind/Desktop/data/MSE_label.csv', testPredict_DAE2, delimiter=',')
+savetxt(r'./data/MSE_label.csv', testPredict_DAE2, delimiter=',')
 
 mse_cls = np.zeros((sn),dtype=d_type)
 mse_label = np.zeros((sn),dtype=d_type)
